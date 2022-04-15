@@ -1,5 +1,26 @@
 # xstate
 
+## 4.31.1
+
+### Patch Changes
+
+- [#3215](https://github.com/statelyai/xstate/pull/3215) [`44c66e74f`](https://github.com/statelyai/xstate/commit/44c66e74f9eafbb326979234e2bbe51e38dc3a86) Thanks [@tom-sherman](https://github.com/tom-sherman)! - Removing the timeout that's built in to `waitFor` is now supported by explicitly passing an `Infinity` value.
+
+  Example usage:
+
+  ```js
+  import { waitFor } from 'xstate/lib/waitFor';
+
+  // This will
+  const loggedInState = await waitFor(
+    loginService,
+    state => state.hasTag('loggedIn'),
+    { timeout: Infinity }
+  );
+  ```
+
+  This fixes a bug that causes `waitFor` to reject with an error immediately due to the behaviour of `setTimeout`.
+
 ## 4.31.0
 
 ### Minor Changes
